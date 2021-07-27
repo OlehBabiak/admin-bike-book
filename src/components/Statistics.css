@@ -1,0 +1,28 @@
+.statistic{
+    margin-top: 26px;
+}
+
+.statistic-title{
+    height: 28px;
+    font-family: 'Saira';
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 28px;
+    color: #000000;
+}
+
+.statistic-item{
+    font-family: Saira;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 22px;
+    color: #000000;
+    height: 22px;
+    margin-top: 5px;
+}
+
+.statistic-item>span{
+    font-weight: 700;
+}

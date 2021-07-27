@@ -1,0 +1,80 @@
+.row{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    position: static;
+    width: 481.45px;
+    height: 29px;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+input {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 5px 16px;
+    position: static;
+    width: 235.23px;
+    background: #E8E8E8;
+    border-radius: 5px;
+    border: none;
+    font-family: 'Saira';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+}
+
+.description{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    height: 75px;
+    position: static;
+    width: 481.45px;
+    background: #E8E8E8;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.form-buttons{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    justify-content: space-between;
+    position: static;
+    width: 481.45px;
+    height: 24px;
+    top: 212px;
+    margin-top: 10px;
+    margin-bottom: 16px;
+}
+
+button{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 4px 22px;
+    position: static;
+    width: 235.23px;
+    height: 24px;
+    background: #696969;
+    border-radius: 5px;
+    border: none;
+    justify-content: center;
+}
+
+button>p{
+    font-family: 'Saira';
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: #FFFFFF;
+}
