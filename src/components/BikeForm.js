@@ -4,7 +4,19 @@ import BikeContext from "./context/BikeContext";
 
 function BikeForm() {
 
-    const {onBikeCreate, bikeInput, setBikeInpuT, bikeData} = useContext(BikeContext)
+    const {onBikeCreate} = useContext(BikeContext)
+
+    const [bikeInput, setBikeInpuT] = useState({
+        bikeName: '',
+        bikeType: '',
+        bikeColor: '',
+        bikeWheelSize: '',
+        bikePrice: '',
+        bikeID: '',
+        bikeDescription: '',
+        status: 'Available'
+    });
+
 
     const nameChangeHandler = (event) => {
         let value = event.target.value
@@ -73,7 +85,19 @@ function BikeForm() {
     const submitHandler = (event) => { //////////////////////////////////////////////////////////
         event.preventDefault();
 
+        const bikeData = {
+            name: bikeInput.bikeName,
+            type: bikeInput.bikeType,
+            color: bikeInput.bikeColor,
+            wheelSize: bikeInput.bikeWheelSize,
+            price: bikeInput.bikePrice,
+            id: bikeInput.bikeID,
+            description: bikeInput.bikeDescription,
+            status: bikeInput.status
+        }
+
         onBikeCreate(bikeData)
+
         setBikeInpuT({ // очищаємо інпут
             bikeName: '',
             bikeType: '',
