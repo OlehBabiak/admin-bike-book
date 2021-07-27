@@ -2,27 +2,19 @@ import './Main.css'
 import BikeList from "./bikes/BikeList";
 import BikeForm from "./BikeForm";
 import Statistics from "./Statistics";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import ScrollBar from "./scrollBar/ScrollBar";
+import BikeContext from "./context/BikeContext";
 
 function Main() {
-    const initionalBikesState  = [];
-    const [bikeArray, setBikeArray] = useState(initionalBikesState);
-
-    const saveBikedataHandler = (enteredBikeData) => {
-        setBikeArray(prevBike => {
-            return [enteredBikeData, ...prevBike]
-        })
-    }
-    console.log('!!!!', bikeArray)
     return (
        <div className='main'>
            <div className='bike-list'>
-               <ScrollBar item={bikeArray}/>
+               <ScrollBar/>
            </div>
            <div className='vertical-devider'/>
            <div className='bake-data'>
-               <BikeForm saveBikedataHandler={saveBikedataHandler}/>
+               <BikeForm/>
                <div className='horisontal-devider'/>
                <Statistics/>
            </div>

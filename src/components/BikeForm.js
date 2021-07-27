@@ -1,18 +1,10 @@
 import './BikeForm.css'
-import {useState} from "react";
+import {useContext, useState} from "react";
+import BikeContext from "./context/BikeContext";
 
-function BikeForm(props) {
+function BikeForm() {
 
-
-    const [bikeInput, setBikeInpuT] = useState({
-        bikeName: '',
-        bikeType: '',
-        bikeColor: '',
-        bikeWheelSize: '',
-        bikePrice: '',
-        bikeID: '',
-        bikeDescription: ''
-    });
+    const {onBikeCreate, bikeInput, setBikeInpuT, bikeData} = useContext(BikeContext)
 
     const nameChangeHandler = (event) => {
         let value = event.target.value
@@ -23,7 +15,6 @@ function BikeForm(props) {
             }
         })
     }
-
     const typeChangeHandler = (event) => {
         let value = event.target.value
         setBikeInpuT((bikeInput)=>{
@@ -79,20 +70,10 @@ function BikeForm(props) {
         })
     }
 
-    const submitHandler = (event) => {
+    const submitHandler = (event) => { //////////////////////////////////////////////////////////
         event.preventDefault();
 
-        const bikeData = {
-            name: bikeInput.bikeName,
-            type: bikeInput.bikeType,
-            color: bikeInput.bikeColor,
-            wheelSize: bikeInput.bikeWheelSize,
-            price: bikeInput.bikePrice,
-            id: bikeInput.bikeID,
-            description: bikeInput.bikeDescription
-        }
-        props.saveBikedataHandler(bikeData)
-
+        onBikeCreate(bikeData)
         setBikeInpuT({ // очищаємо інпут
             bikeName: '',
             bikeType: '',
