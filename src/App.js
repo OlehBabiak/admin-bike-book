@@ -4,7 +4,6 @@ import Footer from "./components/Footer";
 import Main from "./components/Main";
 import BikeContextprovider from "./components/context/BikeContextProvider";
 
-
 function App() {
     return (
         <div className='app'>
@@ -17,6 +16,5 @@ function App() {
 
     );
 }
-
 
 export default App;

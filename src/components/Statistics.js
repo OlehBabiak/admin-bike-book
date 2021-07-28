@@ -8,8 +8,6 @@ function Statistics() {
 
     const averageCost = Math.round(AveragePriceCounter().toFixed(4))
 
-
-
     return (
         <div className='statistic'>
             <div className='statistic-title'>Statistics</div>

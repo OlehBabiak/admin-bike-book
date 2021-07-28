@@ -34,15 +34,12 @@ function BikeForm() {
         handleBikeChange('bikeDescription', event.target.value)
     }
 
-
-
     const submitHandler = (event) => { //////////////////////////////////////////////////////////
         event.preventDefault();
 
         onBikeCreate({...bikeInput})
         clearInput()
     };
-
 
     return (
        <form onSubmit={submitHandler}>
