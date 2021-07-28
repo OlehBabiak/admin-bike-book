@@ -120,7 +120,7 @@ function BikeForm() {
            </div>
            <div className='form-buttons'>
                <button><p>SAVE</p></button>
-               <button><p>CLEAR</p></button>
+               <button onClick={clearInput}><p>CLEAR</p></button>
            </div>
        </form>
     );
