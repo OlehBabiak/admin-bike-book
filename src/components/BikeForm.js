@@ -105,8 +105,7 @@ function BikeForm() {
                />
            </div>
            <div className='description'>
-               <input
-                   className='description-input'
+               <textarea
                    type='text'
                    name='description'
                    placeholder='Description'
