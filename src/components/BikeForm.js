@@ -1,12 +1,10 @@
 import './BikeForm.css'
-import {useContext, useState} from "react";
+import {useContext} from "react";
 import BikeContext from "./context/BikeContext";
 
 function BikeForm() {
 
-    const {onBikeCreate, bikeInput, setBikeInpuT, status} = useContext(BikeContext)
-
-
+    const {onBikeCreate, bikeInput, clearInput, setBikeInpuT} = useContext(BikeContext)
 
 
     const nameChangeHandler = (event) => {
@@ -73,23 +71,18 @@ function BikeForm() {
         })
     }
 
+    // const onBikeChange = ({target: {name, value}}) =>{
+    //     console.log({target: {name, value}})
+    //     setBikeInpuT((bikeInput) => {return {...bikeInput, [name]: value}})
+    // }
+
+
     const submitHandler = (event) => { //////////////////////////////////////////////////////////
         event.preventDefault();
 
-
         onBikeCreate({...bikeInput})
 
-        setBikeInpuT({ // очищаємо інпут
-            bikeName: '',
-            bikeType: '',
-            bikeColor: '',
-            bikeWheelSize: '',
-            bikePrice: '',
-            bikeID: '',
-            bikeDescription: '',
-
-            }
-        );
+        clearInput()
     };
 
 

@@ -5,26 +5,52 @@ import NativeSelect from '@material-ui/core/NativeSelect';
 import BikeContext from "../context/BikeContext";
 
 function BikeItem(props) {
-    const {status, handleChange} = useContext(BikeContext)
+    let {type, id, color, name, price} = props
+    const {setBikeArray, bikeArray} = useContext(BikeContext)
 
     const closeIconStyle = {
         fontSize: 'medium'
     }
 
+    let initialItemBorderColor = {border: '2px solid #6FCF97'}
+    const [itemBorderColor, setItemBorderColor] = useState(initialItemBorderColor);
+
+    const yellowBorder = {
+        border: '2px solid #F2994A'
+    }
+    const redBorder = {
+        border: '2px solid #EB5757'
+    }
+
+    const handleStatusChange = (event) => {
+        if (event.target.value === 'Busy') {
+            setItemBorderColor(yellowBorder)
+        } else if (event.target.value === 'Unvailable') {
+            setItemBorderColor(redBorder)
+        } else {
+            setItemBorderColor(initialItemBorderColor)
+        }
+        setBikeArray(bikeArray.map(bike => {
+            if(id === bike.bikeID){
+                bike.status = event.target.value
+            }
+            return bike
+        }));
+    };
 
     return (
         <>
-            <div className='bike-item'>
+            <div className='bike-item' style={itemBorderColor}>
                 <div>
                     <div className='bike-fields'><span
-                        className='bike-name'>{props.name.toUpperCase()} -</span> {props.type.toUpperCase()} ({props.color.toUpperCase()})
+                        className='bike-name'>{name.toUpperCase()} -</span> {type.toUpperCase()} ({color.toUpperCase()})
                     </div>
-                    <div className='bike-id'>ID: {props.id}</div>
+                    <div className='bike-id'>ID: {id}</div>
                     <div className='status'>
                         <div>STATUS:</div>
                         <NativeSelect className='select'
-                                      value={status}
-                                      onChange={handleChange}
+                                      // value={status}
+                                      onChange={handleStatusChange}
                         >
                             <option value='Available'>Available</option>
                             <option value='Busy'>Busy</option>
@@ -36,7 +62,7 @@ function BikeItem(props) {
                     <div className='bike-item-right-close'>
                         <CloseIcon style={closeIconStyle}/>
                     </div>
-                    <div>{props.price} UAH/hr.</div>
+                    <div>{price} UAH/hr.</div>
                 </div>
             </div>
         </>

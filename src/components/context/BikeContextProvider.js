@@ -6,7 +6,6 @@ function BikeContextprovider({children}) {
     let initionalBikesState  = [];
     const [bikeArray, setBikeArray] = useState(initionalBikesState);
 
-    const [status, setStatus] = useState('Available');
 
     const onBikeCreate = (newBike) => {
         setBikeArray([newBike, ...bikeArray])
@@ -20,26 +19,34 @@ function BikeContextprovider({children}) {
         bikePrice: '',
         bikeID: '',
         bikeDescription: '',
-        status: status
+        status: 'Available'
     });
 
-    const handleChange = (event) => {
-        setStatus((bikeInput)=>{
-            return {
-                ...bikeInput,
-                status: event.target.value
+    const clearInput = () => {
+        setBikeInpuT({ // очищаємо інпут
+                bikeName: '',
+                bikeType: '',
+                bikeColor: '',
+                bikeWheelSize: '',
+                bikePrice: '',
+                bikeID: '',
+                bikeDescription: '',
+                status: 'Available'
             }
-        });
-    };
-    console.log(bikeArray)
+        );
+    }
+
+
+    console.log('!!!', bikeArray)
     return (
        <BikeContext.Provider value={{
            onBikeCreate,
            bikeArray,
            bikeInput,
            setBikeInpuT,
-           handleChange,
-           status
+           setBikeArray,
+           clearInput,
+
        }}>
            {children}
        </BikeContext.Provider>
