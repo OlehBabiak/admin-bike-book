@@ -4,7 +4,7 @@ import {useContext} from "react";
 import BikeContext from "../context/BikeContext";
 
 function BikeList() {
-    const {bikeArray} = useContext(BikeContext)
+    const {bikeArray, removeBike} = useContext(BikeContext)
 
     return (
        <ul className='bike-list'>
@@ -19,6 +19,8 @@ function BikeList() {
                id={bikeItem.bikeID}
                description={bikeItem.bikeDescription}
                status = {bikeItem.status}
+               bikeItem = {bikeItem}
+               removeBike={removeBike}
                />
            )}
        </ul>
