@@ -4,18 +4,9 @@ import BikeContext from "./context/BikeContext";
 
 function BikeForm() {
 
-    const {onBikeCreate} = useContext(BikeContext)
+    const {onBikeCreate, bikeInput, setBikeInpuT, status} = useContext(BikeContext)
 
-    const [bikeInput, setBikeInpuT] = useState({
-        bikeName: '',
-        bikeType: '',
-        bikeColor: '',
-        bikeWheelSize: '',
-        bikePrice: '',
-        bikeID: '',
-        bikeDescription: '',
-        status: 'Available'
-    });
+
 
 
     const nameChangeHandler = (event) => {
@@ -85,18 +76,8 @@ function BikeForm() {
     const submitHandler = (event) => { //////////////////////////////////////////////////////////
         event.preventDefault();
 
-        const bikeData = {
-            name: bikeInput.bikeName,
-            type: bikeInput.bikeType,
-            color: bikeInput.bikeColor,
-            wheelSize: bikeInput.bikeWheelSize,
-            price: bikeInput.bikePrice,
-            id: bikeInput.bikeID,
-            description: bikeInput.bikeDescription,
-            status: bikeInput.status
-        }
 
-        onBikeCreate(bikeData)
+        onBikeCreate({...bikeInput})
 
         setBikeInpuT({ // очищаємо інпут
             bikeName: '',
@@ -105,7 +86,8 @@ function BikeForm() {
             bikeWheelSize: '',
             bikePrice: '',
             bikeID: '',
-            bikeDescription: ''
+            bikeDescription: '',
+
             }
         );
     };
@@ -123,7 +105,7 @@ function BikeForm() {
                       step='1'/>
            </div>
            <div className='row'>
-               <input type='number' name='price' placeholder='Price' onChange={priceChangeHandler} min='0.01'
+               <input type='number' name='price' placeholder='Price' onChange={priceChangeHandler} value={bikeInput.bikePrice} min='0.01'
                       step='0.01'/>
                <input type='text' name='id' placeholder='ID (slug): XXXXXXXXXXXXX' onChange={idChangeHandler} value={bikeInput.bikeID}/>
            </div>

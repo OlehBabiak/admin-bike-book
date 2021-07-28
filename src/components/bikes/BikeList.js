@@ -5,18 +5,19 @@ import BikeContext from "../context/BikeContext";
 
 function BikeList() {
     const {bikeArray} = useContext(BikeContext)
+
     return (
        <ul className='bike-list'>
            {bikeArray.map(bikeItem =>
                <BikeItem
-               key={bikeItem.id}
-               name={bikeItem.name}
-               type={bikeItem.type}
-               color={bikeItem.color}
-               wheelSize={bikeItem.wheelSize}
-               price={bikeItem.price}
-               id={bikeItem.id}
-               description={bikeItem.description}
+               key={bikeItem.bikeID}
+               name={bikeItem.bikeName}
+               type={bikeItem.bikeType}
+               color={bikeItem.bikeColor}
+               wheelSize={bikeItem.bikeWheelSize}
+               price={bikeItem.bikePrice}
+               id={bikeItem.bikeID}
+               description={bikeItem.bikeDescription}
                status = {bikeItem.status}
                />
            )}
