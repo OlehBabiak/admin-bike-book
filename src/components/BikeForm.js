@@ -9,6 +9,7 @@ function BikeForm() {
         bikeInput,
         clearInput,
         handleBikeChange,
+        getBikeArrayfromDB
     } = useContext(BikeContext)
 
 
@@ -36,7 +37,6 @@ function BikeForm() {
 
     const submitHandler = (event) => { //////////////////////////////////////////////////////////
         event.preventDefault();
-
         onBikeCreate({...bikeInput})
         clearInput()
     };
@@ -116,8 +116,8 @@ function BikeForm() {
                />
            </div>
            <div className='form-buttons'>
-               <button><p>SAVE</p></button>
-               <button onClick={clearInput}><p>CLEAR</p></button>
+               <button type='submit'><p>SAVE</p></button>
+               <button type='button' onClick={clearInput}><p>CLEAR</p></button>
            </div>
        </form>
     );

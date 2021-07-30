@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import BikeContext from "./BikeContext";
+import * as localForage from 'localforage'
 
 const defoltValue = {
     bikeName: '',
@@ -14,17 +15,27 @@ const defoltValue = {
 
 function BikeContextprovider({children}) {
 
-    const initionalBikesState  = [];
+    const initionalBikesState = [];
     const [bikeArray, setBikeArray] = useState(initionalBikesState);
+
+    const saveDataToDB = (field, data) => {  //////////////////////////////////
+        localForage.setItem(field, data).then(() => {
+            console.log('user saved')
+        })
+    };
 
     const onBikeCreate = (newBike) => {
         bikeArray.map(bike => {
-            if(newBike.bikeID === bike.bikeID){
+            if (newBike.bikeID === bike.bikeID) {
                 return alert('Такий ID вже існує!!!')
             }
         })
+        saveDataToDB(`ID: ${newBike.bikeID}`, newBike)  /////////////////////
         setBikeArray([newBike, ...bikeArray])
+
     }
+
+    saveDataToDB('arr', bikeArray)
 
     const [bikeInput, setBikeInpuT] = useState(defoltValue);
 
@@ -36,7 +47,7 @@ function BikeContextprovider({children}) {
         setBikeInpuT(defoltValue)
     }
 
-    const handleBikeChange = (name, value) =>{                                      //додати дані з інпута
+    const handleBikeChange = (name, value) => {                                      //додати дані з інпута
         setBikeInpuT({...bikeInput, [name]: value})
     }
 
@@ -48,27 +59,27 @@ function BikeContextprovider({children}) {
         bikeArray.forEach(bike => {
             totalPrice += +bike.bikePrice;
         })
-        return totalPrice/bikeArray.length
+        return totalPrice / bikeArray.length
     }
 
-
     return (
-       <BikeContext.Provider value={{
-           onBikeCreate,
-           bikeArray,
-           bikeInput,
-           setBikeInpuT,
-           setBikeArray,
-           clearInput,
-           handleBikeChange,
-           defoltValue,
-           removeBike,
-           availableBikes,
-           bookedBikes,
-           AveragePriceCounter
-       }}>
-           {children}
-       </BikeContext.Provider>
+        <BikeContext.Provider value={{
+            onBikeCreate,
+            bikeArray,
+            bikeInput,
+            setBikeInpuT,
+            setBikeArray,
+            clearInput,
+            handleBikeChange,
+            defoltValue,
+            removeBike,
+            availableBikes,
+            bookedBikes,
+            AveragePriceCounter,
+            saveDataToDB
+        }}>
+            {children}
+        </BikeContext.Provider>
     );
 }
 

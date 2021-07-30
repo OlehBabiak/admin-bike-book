@@ -2,10 +2,12 @@ import './BikeList.css'
 import BikeItem from "./BikeItem";
 import {useContext} from "react";
 import BikeContext from "../context/BikeContext";
+import * as localForage from 'localforage'
 
 function BikeList() {
     const {bikeArray, removeBike} = useContext(BikeContext)
 
+    
     return (
        <ul className='bike-list'>
            {bikeArray.map(bikeItem =>

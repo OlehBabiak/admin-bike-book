@@ -2,6 +2,7 @@ import './Statistics.css'
 import {useContext} from "react";
 import BikeContext from "./context/BikeContext";
 
+
 function Statistics() {
 
     const {bikeArray, availableBikes, bookedBikes, AveragePriceCounter} = useContext(BikeContext)
