@@ -19,7 +19,7 @@ function BikeContextprovider({children}) {
     const [bikeArray, setBikeArray] = useState(initionalBikesState);
 
     const saveDataToDB = (field, data) => {  
-        localForage.setItem(field, data).then(() => {
+        localForage.setItem(field, data)
     };
     
     const onBikeCreate = (newBike) => {
@@ -49,7 +49,6 @@ function BikeContextprovider({children}) {
     }
 
     const availableBikes = bikeArray.filter(bike => bike.status === 'Available')
-        
     const bookedBikes = bikeArray.filter(bike => bike.status !== 'Available')
 
     const AveragePriceCounter = () => {
