@@ -11,8 +11,7 @@ function BikeForm() {
         handleBikeChange,
         getBikeArrayfromDB
     } = useContext(BikeContext)
-
-
+    
     const nameChangeHandler = (event) => {
         handleBikeChange('bikeName', event.target.value)
     }
@@ -50,7 +49,7 @@ function BikeForm() {
                    placeholder='Name'
                    onChange={nameChangeHandler}
                    value={bikeInput.bikeName}
-                   required="required"
+                   required
                    minLength="5"
                />
                <input
@@ -59,7 +58,7 @@ function BikeForm() {
                    placeholder='Type'
                    onChange={typeChangeHandler}
                    value={bikeInput.bikeType}
-                   required="required"
+                   required
                    minLength="5"
                />
            </div>
@@ -70,7 +69,8 @@ function BikeForm() {
                    placeholder='Color'
                    onChange={colorChangeHandler}
                    value={bikeInput.bikeColor}
-                   required="required"
+                   required
+                   minLength="3"
                />
                <input
                    type='number'
@@ -80,7 +80,7 @@ function BikeForm() {
                    value={bikeInput.bikeWheelSize}
                    min='1'
                    step='1'
-                   required="required"
+                   required
                />
            </div>
            <div className='row'>
@@ -92,7 +92,7 @@ function BikeForm() {
                    value={bikeInput.bikePrice}
                    min='1'
                    step='0.01'
-                   required="required"
+                   required
                />
                <input
                    type='text'
@@ -100,8 +100,8 @@ function BikeForm() {
                    placeholder='ID (slug): XXXXXXXXXXXXX'
                    onChange={idChangeHandler}
                    value={bikeInput.bikeID}
+                   required
                    minLength="5"
-                   required="required"
                />
            </div>
            <div className='description'>
@@ -111,7 +111,7 @@ function BikeForm() {
                    placeholder='Description'
                    onChange={descriptionChangeHandler}
                    value={bikeInput.bikeDescription}
-                   required="required"
+                   required
                    minLength="5"
                />
            </div>

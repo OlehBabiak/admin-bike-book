@@ -1,5 +1,6 @@
 # Hi everyone and getting started with Admin Bike Book
 
+### Unfortunately, I do not yet have experience writing these instructions, so I leave here default react instruction ;-)
 
 ## Available Scripts
 

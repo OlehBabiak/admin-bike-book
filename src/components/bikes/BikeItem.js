@@ -18,6 +18,7 @@ const BikeItem = memo(({bikeItem, removeBike}) => {
     const yellowBorder = {
         border: '2px solid #F2994A'
     }
+    
     const redBorder = {
         border: '2px solid #EB5757'
     }
