@@ -8,8 +8,7 @@ function BikeForm() {
         onBikeCreate,
         bikeInput,
         clearInput,
-        handleBikeChange,
-        getBikeArrayfromDB
+        handleBikeChange
     } = useContext(BikeContext)
     
     const nameChangeHandler = (event) => {

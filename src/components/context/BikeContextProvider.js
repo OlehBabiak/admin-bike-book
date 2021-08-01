@@ -17,20 +17,18 @@ function BikeContextprovider({children}) {
 
     const initionalBikesState  = [];
     const [bikeArray, setBikeArray] = useState(initionalBikesState);
-    const [uniqBikeArray, setUniqBikeArray] = useState(initionalBikesState);
-        
+
     const saveDataToDB = (field, data) => {  
         localForage.setItem(field, data).then(() => {
-            console.log('user saved')})
     };
     
     const onBikeCreate = (newBike) => {
-      let checkDoubleInputArray = bikeArray.map(bike => {
+      let checkDoubleIDArray = bikeArray.map(bike => {
          if(newBike.bikeID === bike.bikeID) 
           return bike.bikeID
           }
         )
-        checkDoubleInputArray.includes(newBike.bikeID)?alert('Такий ID вже існує!'):setBikeArray([newBike, ...bikeArray])
+        checkDoubleIDArray.includes(newBike.bikeID)?alert('Такий ID вже існує!'):setBikeArray([newBike, ...bikeArray])  //checking bikes on double ID
         saveDataToDB(`ID: ${newBike.bikeID}`, newBike)
     }
 
@@ -38,19 +36,20 @@ function BikeContextprovider({children}) {
     
     const [bikeInput, setBikeInpuT] = useState(defoltValue);
 
-    const removeBike = (id) => {                                                    // Видалити байк
+    const removeBike = (id) => {                                                    // Delete bike
         setBikeArray(bikeArray.filter(bike => bike.bikeID !== id))
     }
 
-    const clearInput = () => {                                                              // очистити інпут
+    const clearInput = () => {                                                              // clear input
         setBikeInpuT(defoltValue)
     }
 
-    const handleBikeChange = (name, value) =>{                                      //додати дані з інпута
+    const handleBikeChange = (name, value) =>{                                      //adding data from input
         setBikeInpuT({...bikeInput, [name]: value})
     }
 
     const availableBikes = bikeArray.filter(bike => bike.status === 'Available')
+        
     const bookedBikes = bikeArray.filter(bike => bike.status !== 'Available')
 
     const AveragePriceCounter = () => {
