@@ -1,133 +1,122 @@
 import './BikeForm.css'
-import {useState} from "react";
+import {useContext} from "react";
+import BikeContext from "./context/BikeContext";
 
-function BikeForm(props) {
+function BikeForm() {
 
-
-    const [bikeInput, setBikeInpuT] = useState({
-        bikeName: '',
-        bikeType: '',
-        bikeColor: '',
-        bikeWheelSize: '',
-        bikePrice: '',
-        bikeID: '',
-        bikeDescription: ''
-    });
-
+    const {
+        onBikeCreate,
+        bikeInput,
+        clearInput,
+        handleBikeChange
+    } = useContext(BikeContext)
+    
     const nameChangeHandler = (event) => {
-        let value = event.target.value
-        setBikeInpuT((bikeInput)=>{
-            return {
-                ...bikeInput,
-                bikeName: value,
-            }
-        })
+        handleBikeChange('bikeName', event.target.value)
     }
-
     const typeChangeHandler = (event) => {
-        let value = event.target.value
-        setBikeInpuT((bikeInput)=>{
-            return {
-                ...bikeInput,
-                bikeType: value,
-            }
-        })
+        handleBikeChange('bikeType', event.target.value)
     }
     const colorChangeHandler = (event) => {
-        let value = event.target.value
-        setBikeInpuT((bikeInput)=>{
-            return {
-                ...bikeInput,
-                bikeColor: value,
-            }
-        })
+        handleBikeChange('bikeColor', event.target.value)
     }
     const wheelSizeChangeHandler = (event) => {
-        let value = event.target.value
-        setBikeInpuT((bikeInput)=>{
-            return {
-                ...bikeInput,
-                bikeWheelSize: value,
-            }
-        })
+        handleBikeChange('bikeWheelSize', event.target.value)
     }
     const priceChangeHandler = (event) => {
-        let value = event.target.value
-        setBikeInpuT((bikeInput)=>{
-            return {
-                ...bikeInput,
-                bikePrice: value,
-            }
-        })
+        handleBikeChange('bikePrice', event.target.value)
     }
     const idChangeHandler = (event) => {
-        let value = event.target.value
-        setBikeInpuT((bikeInput)=>{
-            return {
-                ...bikeInput,
-                bikeID: value,
-            }
-        })
+        handleBikeChange('bikeID', event.target.value)
     }
     const descriptionChangeHandler = (event) => {
-        let value = event.target.value
-        setBikeInpuT((bikeInput)=>{
-            return {
-                ...bikeInput,
-                bikeDescription: value
-            }
-        })
+        handleBikeChange('bikeDescription', event.target.value)
     }
 
-    const submitHandler = (event) => {
+    const submitHandler = (event) => { //////////////////////////////////////////////////////////
         event.preventDefault();
-
-        const bikeData = {
-            name: bikeInput.bikeName,
-            type: bikeInput.bikeType,
-            color: bikeInput.bikeColor,
-            wheelSize: bikeInput.bikeWheelSize,
-            price: bikeInput.bikePrice,
-            id: bikeInput.bikeID,
-            description: bikeInput.bikeDescription
-        }
-        props.saveBikedataHandler(bikeData)
-
-        setBikeInpuT({ // очищаємо інпут
-            bikeName: '',
-            bikeType: '',
-            bikeColor: '',
-            bikeWheelSize: '',
-            bikePrice: '',
-            bikeID: '',
-            bikeDescription: ''
-            }
-        );
+        onBikeCreate({...bikeInput})
+        clearInput()
     };
-
 
     return (
        <form onSubmit={submitHandler}>
            <div className='row'>
-               <input type='text' name='name' placeholder='Name' onChange={nameChangeHandler} value={bikeInput.bikeName}/>
-               <input type='text' name='type' placeholder='Type' onChange={typeChangeHandler} value={bikeInput.bikeType}/>
+               <input
+                   type='text'
+                   name='name'
+                   placeholder='Name'
+                   onChange={nameChangeHandler}
+                   value={bikeInput.bikeName}
+                   required
+                   minLength="5"
+               />
+               <input
+                   type='text'
+                   name='type'
+                   placeholder='Type'
+                   onChange={typeChangeHandler}
+                   value={bikeInput.bikeType}
+                   required
+                   minLength="5"
+               />
            </div>
            <div className='row'>
-               <input type='text' name='color' placeholder='Color' onChange={colorChangeHandler} value={bikeInput.bikeColor}/>
-               <input type='number' name='wheelSize' placeholder='Wheel size' onChange={wheelSizeChangeHandler} value={bikeInput.bikeWheelSize} min='1'
-                      step='1'/>
+               <input
+                   type='text'
+                   name='color'
+                   placeholder='Color'
+                   onChange={colorChangeHandler}
+                   value={bikeInput.bikeColor}
+                   required
+                   minLength="3"
+               />
+               <input
+                   type='number'
+                   name='wheelSize'
+                   placeholder='Wheel size'
+                   onChange={wheelSizeChangeHandler}
+                   value={bikeInput.bikeWheelSize}
+                   min='1'
+                   step='1'
+                   required
+               />
            </div>
            <div className='row'>
-               <input type='number' name='price' placeholder='Price' onChange={priceChangeHandler} min='0.01'
-                      step='0.01'/>
-               <input type='text' name='id' placeholder='ID (slug): XXXXXXXXXXXXX' onChange={idChangeHandler} value={bikeInput.bikeID}/>
+               <input
+                   type='number'
+                   name='price'
+                   placeholder='Price'
+                   onChange={priceChangeHandler}
+                   value={bikeInput.bikePrice}
+                   min='1'
+                   step='0.01'
+                   required
+               />
+               <input
+                   type='text'
+                   name='id'
+                   placeholder='ID (slug): XXXXXXXXXXXXX'
+                   onChange={idChangeHandler}
+                   value={bikeInput.bikeID}
+                   required
+                   minLength="5"
+               />
            </div>
            <div className='description'>
-               <input type='text' name='description' placeholder='Description' onChange={descriptionChangeHandler} value={bikeInput.bikeDescription}/>
+               <textarea
+                   type='text'
+                   name='description'
+                   placeholder='Description'
+                   onChange={descriptionChangeHandler}
+                   value={bikeInput.bikeDescription}
+                   required
+                   minLength="5"
+               />
            </div>
            <div className='form-buttons'>
-               <button><p>SAVE</p></button>
-               <button><p>CLEAR</p></button>
+               <button type='submit'><p>SAVE</p></button>
+               <button type='button' onClick={clearInput}><p>CLEAR</p></button>
            </div>
        </form>
     );

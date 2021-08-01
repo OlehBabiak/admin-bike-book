@@ -1,57 +1,79 @@
-import React from 'react';
+import React, {useContext, useState, memo} from 'react';
 import './BikeItem.css'
 import CloseIcon from "@material-ui/icons/Close"
 import NativeSelect from '@material-ui/core/NativeSelect';
-import {makeStyles} from "@material-ui/core";
+import BikeContext from "../context/BikeContext";
 
-const useStyles = makeStyles((theme) => ({
-    formControl: {
-        margin: theme.spacing(1),
-        minWidth: 120,
-    },
-    selectEmpty: {
-        marginTop: theme.spacing(2),
-    },
-}));
-
-function BikeItem(props) {
+const BikeItem = memo(({bikeItem, removeBike}) => {
+    const {bikeType, bikeID, bikeColor, bikeName, bikePrice} = bikeItem
+    const {setBikeArray, bikeArray} = useContext(BikeContext)
 
     const closeIconStyle = {
         fontSize: 'medium'
     }
 
-    const handleChange = () => {
-        console.log('border changes color') // !!!!!!!!!!!!!!!!!!!!
+    let initialItemBorderColor = {border: '2px solid #6FCF97'}
+    const [itemBorderColor, setItemBorderColor] = useState(initialItemBorderColor);
+
+    const yellowBorder = {
+        border: '2px solid #F2994A'
     }
+    
+    const redBorder = {
+        border: '2px solid #EB5757'
+    }
+
+    const onBikeDelete = () => {
+        const answer = window.confirm('Ви впевненні?')
+        if(answer){
+            removeBike(bikeID)
+        }
+    }
+
+    const handleStatusChange = (event) => {
+        if (event.target.value === 'Busy') {   // зміна рамки при зміні статусу
+            setItemBorderColor(yellowBorder)
+        } else if (event.target.value === 'Unvailable') {
+            setItemBorderColor(redBorder)
+        } else {
+            setItemBorderColor(initialItemBorderColor)
+        }
+        setBikeArray(bikeArray.map(bike => {      //заміна статусу
+            if(bikeID === bike.bikeID){
+                bike.status = event.target.value
+            }
+            return bike
+        }));
+    };
+
     return (
         <>
-            <div className='bike-item'>
+            <div className='bike-item' style={itemBorderColor}>
                 <div>
-                    <div className='bike-fields'><span className='bike-name'>{props.name.toUpperCase()} -</span> {props.type.toUpperCase()} ({props.color.toUpperCase()})</div>
-                    <div className='bike-id'>ID: {props.id}</div>
+                    <div className='bike-fields'><span
+                        className='bike-name'>{bikeName.toUpperCase()} -</span> {bikeType.toUpperCase()} ({bikeColor.toUpperCase()})
+                    </div>
+                    <div className='bike-id'>ID: {bikeID}</div>
                     <div className='status'>
                         <div>STATUS:</div>
-                            <NativeSelect className='select'
-                                //value={state.age}
-                                onChange={handleChange}
-                                name="status"
-                                inputProps={{ 'aria-label': 'status' }}
-                            >
-                                <option value='Available'>Available</option>
-                                <option value='Busy'>Busy</option>
-                                <option value='Unvailable'>Unvailable</option>
-                            </NativeSelect>
+                        <NativeSelect className='select'
+                                      onChange={handleStatusChange}
+                        >
+                            <option value='Available'>Available</option>
+                            <option value='Busy'>Busy</option>
+                            <option value='Unvailable'>Unvailable</option>
+                        </NativeSelect>
                     </div>
                 </div>
                 <div className='bike-item-right'>
-                    <div className='bike-item-right-close'>
+                    <div onClick={onBikeDelete} className='bike-item-right-close'>
                         <CloseIcon style={closeIconStyle}/>
                     </div>
-                    <div>{props.price} UAH/hr.</div>
+                    <div>{bikePrice} UAH/hr.</div>
                 </div>
             </div>
         </>
     );
-}
+})
 
 export default BikeItem
